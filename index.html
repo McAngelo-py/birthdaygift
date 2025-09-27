@@ -3,86 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Babi!</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>A Special Gift for Babi 🎁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .gift-container {
+            text-align: center;
+            position: relative;
+        }
+
+        .gift-message {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .gift-box {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: bounceIn 1s ease-out 1s forwards;
+            background-image: url('./images/gift_11577313.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4)) brightness(1.1);
+        }
+
+        .tap-instruction {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            opacity: 0;
+            animation: pulse 2s ease-in-out 2s infinite, fadeInUp 1s ease-out 1.5s forwards;
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; right: 15%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 25%; left: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 35%; right: 10%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { top: 15%; left: 60%; animation-delay: 0.3s; }
+        .sparkle:nth-child(6) { bottom: 20%; right: 50%; animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gift-opening {
+            animation: giftOpen 1s ease-out forwards;
+        }
+
+        @keyframes giftOpen {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2) rotate(5deg);
+            }
+            100% {
+                transform: scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #ff6b6b, #667eea);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
 </head>
 <body>
-    <!-- Floating Balloons -->
-    <div class="balloons-container">
-        <div class="balloon balloon-1"></div>
-        <div class="balloon balloon-2"></div>
-        <div class="balloon balloon-3"></div>
-        <div class="balloon balloon-4"></div>
-        <div class="balloon balloon-5"></div>
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
     </div>
 
-    <!-- Confetti Container -->
-    <div class="confetti-container" id="confetti-container"></div>
+    <div class="gift-container">
+        <h1 class="gift-message">You have a special gift waiting! 💝</h1>
+        
+        <div class="gift-box" id="giftBox"></div>
+        
+        <p class="tap-instruction">✨ Tap the gift to open it! ✨</p>
+    </div>
 
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <h1 class="main-title">Happy Birthday Babi!</h1>
-            <p class="subtitle">Wishing you all the joy and love today and always!</p>
-        </div>
-    </header>
+    <div class="page-transition" id="pageTransition"></div>
 
-    <!-- Photo Gallery Section -->
-    <section class="photo-gallery">
-        <div class="container">
-            <h2 class="section-title">Beautiful Memories</h2>
-            <div class="gallery-grid">
-                <div class="photo-card">
-                    <img src="./images/129822f0-e888-450b-a6f8-6342bdf2394a.jpg" alt="Beautiful Memory 1">
-                </div>
-                <div class="photo-card">
-                    <img src="./images/73d633f3-3ae4-4c10-9ff1-397efc3b8e37.jpg" alt="Beautiful Memory 2">
-                </div>
-                <div class="photo-card">
-                    <img src="./images/96d2bd88-a1d9-4702-abee-381177149354.jpg" alt="Beautiful Memory 3">
-                </div>
-                <div class="photo-card">
-                    <img src="./images/98436413-bcd7-4bee-bda9-b76a744e0c3f.jpg" alt="Beautiful Memory 4">
-                </div>
-                <div class="photo-card">
-                    <img src="./images/b4093833-a75a-40b0-b59e-f5e360c1856a.jpg" alt="Beautiful Memory 5">
-                </div>
-                <div class="photo-card">
-                    <img src="./images/f9b19314-8b92-49da-aa65-3be6f6f81e8d.jpg" alt="Beautiful Memory 6">
-                </div>
-            </div>
-        </div>
-    </section>
+    <script>
+        document.getElementById('giftBox').addEventListener('click', function() {
+            const giftBox = this;
+            const transition = document.getElementById('pageTransition');
+            
+            // Add opening animation to gift box
+            giftBox.classList.add('gift-opening');
+            
+            // Show transition overlay
+            setTimeout(() => {
+                transition.classList.add('active');
+            }, 500);
+            
+            // Redirect to main birthday page
+            setTimeout(() => {
+                window.location.href = 'birthday.html';
+            }, 1500);
+        });
 
-    <!-- Message Section -->
-    <section class="message-section">
-        <div class="container">
-            <div class="message-card">
-                <h2 class="message-title">A Special Message for Babi</h2>
-                <div class="message-content" id="birthday-message">
-                    <p>Happy Birthday, Babi 🩷</p>
-                    
-                    <p>I honestly don't know how I got so lucky to have you in my life. You make everything brighter, softer, and just better. Watching you laugh and seeing you smile is my favorite thing in the world.</p>
-                    
-                    <p>Thank you for being you. For all the love, patience, and the little things you do that make my days so special. I hope today brings you even a fraction of the happiness you give me every day.</p>
-                    
-                    <p>Happy Birthday, my love. I love you more than words can say.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        // Add some extra sparkle effects on hover
+        document.getElementById('giftBox').addEventListener('mouseenter', function() {
+            this.style.filter = 'brightness(1.1) drop-shadow(0 0 20px rgba(255, 215, 0, 0.5))';
+        });
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>Made with ❤️ for Babi</p>
-        </div>
-    </footer>
-
-    <script src="https://unpkg.com/docx@7.8.2/build/index.js"></script>
-    <script src="script.js"></script>
+        document.getElementById('giftBox').addEventListener('mouseleave', function() {
+            this.style.filter = 'none';
+        });
+    </script>
 </body>
 </html>
