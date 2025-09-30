@@ -290,6 +290,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Welcome message
     setTimeout(() => {
-        showNotification('Welcome to Achi\'s Birthday Celebration! 🎂');
+        showNotification('Welcome to Your Birthday Gift! 🎂');
     }, 2000);
 });
